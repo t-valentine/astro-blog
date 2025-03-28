@@ -1,17 +1,35 @@
 ---
+import Nav from '../components/Nav.astro';
+import '../styles/global.css';
 
+const pageTitle = "About Me";
+
+const identity = {
+    firstName: "Valentine",
+    hobbies: ["drawing", "playing TTRPGs", "walking around"]
+}
+
+const pets = ["Taako (chihuahua)", "Vetinari (cat)", "Connor (cat)"];
+
+const testTrueFalse = false;
 ---
-
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>About</h1>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis maiores dolorum ad, aliquam iste inventore debitis impedit, esse saepe ipsam atque illum, omnis sapiente cupiditate repudiandae reprehenderit cumque modi ipsa.</p>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Nav />
+    <h1>{pageTitle}</h1>
+    <p>Hi! My name is {identity.firstName} and this is my blog! I like 
+        <!-- this is absurd, but it's just playing around w/astro -->
+        {identity.hobbies.map((hobby) => hobby !== identity.hobbies[identity.hobbies.length - 1] ? <span>{hobby}, </span> : <span>and {hobby}.</span>)}
+    </p>
+    <p>I have three pets:</p>
+    <ul>
+    {pets.map((pet) => <li>{pet}</li>)}
+    </ul>
+    {testTrueFalse && <p>This isn't on the page!</p>}
+  </body>
 </html>
