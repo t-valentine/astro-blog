@@ -1,19 +1,20 @@
 ---
-import Nav from '../components/Nav.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = "Blog Archive";
 import '../styles/global.css';
----
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+const uniqueTags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Blog</h1>
-		<Nav />
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis maiores dolorum ad, aliquam iste inventore debitis impedit, esse saepe ipsam atque illum, omnis sapiente cupiditate repudiandae reprehenderit cumque modi ipsa.</p>
-	</body>
-</html>
+---
+<BaseLayout pageTitle={pageTitle}>
+<h2>All Posts (Sorted Newest to Oldest)</h2>
+<ul>
+	{allPosts.toReversed().map((post: any) => 
+	<li><a href={post.url}>{post.frontmatter.title}</a> ({post.frontmatter.pubDate.toString().slice(0,10)})</li>)}
+</ul>
+<h2>Tags</h2>
+<ul>
+	{uniqueTags.map((tag) => <li><a href={`/tags/${tag}`}>{tag}</a></li>)}
+</ul>
+
+</BaseLayout>

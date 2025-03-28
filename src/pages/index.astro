@@ -1,19 +1,16 @@
 ---
-import Nav from '../components/Nav.astro';
-import '../styles/global.css';
----
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Debug } from 'astro:components';
+const pageTitle = "Home";
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+const recentPosts = [allPosts[allPosts.length - 1], allPosts[allPosts.length - 2], allPosts[allPosts.length - 3]]
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>My Blog - UNDER CONSTRUCTION</h1>
-		<Nav />
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis maiores dolorum ad, aliquam iste inventore debitis impedit, esse saepe ipsam atque illum, omnis sapiente cupiditate repudiandae reprehenderit cumque modi ipsa.</p>
-	</body>
-</html>
+---
+<BaseLayout pageTitle={pageTitle}>
+	<p>Hiiiii, this is the home page. This is a HUGE wip for the time being as I re-import old blog posts.</p>
+	<h2>Recent Posts</h2>
+	<ul>
+		{recentPosts.map((post: any) => 
+	<li><a href={post.url}>{post.frontmatter.title}</a> ({post.frontmatter.pubDate.toString().slice(0,10)})</li>)}
+	</ul>
+</BaseLayout>

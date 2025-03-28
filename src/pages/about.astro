@@ -1,35 +1,17 @@
 ---
-import Nav from '../components/Nav.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = "About";
 import '../styles/global.css';
-
-const pageTitle = "About Me";
 
 const identity = {
     firstName: "Valentine",
     hobbies: ["drawing", "playing TTRPGs", "walking around"]
 }
-
-const pets = ["Taako (chihuahua)", "Vetinari (cat)", "Connor (cat)"];
-
-const testTrueFalse = false;
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <Nav />
-    <h1>{pageTitle}</h1>
+<BaseLayout pageTitle={pageTitle}>
     <p>Hi! My name is {identity.firstName} and this is my blog! I like 
         <!-- this is absurd, but it's just playing around w/astro -->
         {identity.hobbies.map((hobby) => hobby !== identity.hobbies[identity.hobbies.length - 1] ? <span>{hobby}, </span> : <span>and {hobby}.</span>)}
     </p>
-    <p>I have three pets:</p>
-    <ul>
-    {pets.map((pet) => <li>{pet}</li>)}
-    </ul>
-    {testTrueFalse && <p>This isn't on the page!</p>}
-  </body>
-</html>
+    <p>If you want to check out my art, you should take a look at my <a href="https://honeyhamster.neocities.org/">portfolio</a>.</p>
+</BaseLayout>

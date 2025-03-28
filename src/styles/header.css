@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.header div {
+  background-color: #222329;
+  color: #eeeeee;
+  padding: 10px;
+}
+
+.header div a {
+  color: #eeeeee;
+}
