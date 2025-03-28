@@ -54,5 +54,5 @@ jobs:
         with:
           api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
           cleanup: true
-          dist_dir: tutorial
+          dist_dir: dist
 # maybe if this says dist it just deploys what's in the parent
